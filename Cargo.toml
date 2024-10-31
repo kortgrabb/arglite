@@ -1,0 +1,13 @@
+[package]
+name = "arglite"
+version = "0.1.0"
+edition = "2021"
+authors = ["kortgrabb"]
+description = "A lightweight argument parser for command-line applications."
+license = "MIT"
+repository = "https://github.com/yourusername/arglite"
+readme = "README.md"
+keywords = ["cli", "args", "parser", "argument", "command-line"]
+categories = ["command-line-interface", "command-line-utilities"]
+
+[dependencies]
