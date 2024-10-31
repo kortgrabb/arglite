@@ -1,18 +1,21 @@
+use std::error::Error;
+use std::fmt;
+
 #[derive(Debug)]
 pub enum ArgLiteError {
-    MissingArgument(String),
     UnknownFlag(String),
+    MissingArgument(String),
     ParseError(String),
 }
 
-impl std::fmt::Display for ArgLiteError {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl fmt::Display for ArgLiteError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            ArgLiteError::MissingArgument(arg) => write!(f, "Missing required argument: {}", arg),
             ArgLiteError::UnknownFlag(flag) => write!(f, "Unknown flag: {}", flag),
+            ArgLiteError::MissingArgument(arg) => write!(f, "Missing required argument: {}", arg),
             ArgLiteError::ParseError(msg) => write!(f, "Parse error: {}", msg),
         }
     }
 }
 
-impl std::error::Error for ArgLiteError {}
+impl Error for ArgLiteError {}

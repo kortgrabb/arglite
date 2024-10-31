@@ -9,5 +9,15 @@ repository = "https://github.com/kortgrabb/arglite"
 readme = "README.md"
 keywords = ["cli", "args", "parser", "argument", "command-line"]
 categories = ["command-line-interface", "command-line-utilities"]
+documentation = "https://docs.rs/arglite"
+homepage = "https://github.com/kortgrabb/arglite"
 
 [dependencies]
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+
+[lib]
+name = "arglite"
+path = "src/lib.rs"
