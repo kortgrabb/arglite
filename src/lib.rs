@@ -11,8 +11,9 @@ mod tests {
     #[test]
     fn test_parse_basic_args() {
         let mut parser = ArgParser::new();
-        parser.add_flag("verbose");
-        parser.add_positional("filename");
+        parser.set_description("A test program");
+        parser.add_flag("verbose", "Enable verbose output");
+        parser.add_positional("filename", "Input file to process");
 
         let args = vec![
             "arglite".to_string(),
@@ -27,9 +28,25 @@ mod tests {
     }
 
     #[test]
+    fn test_help_flag() {
+        let mut parser = ArgParser::new();
+        parser.add_flag("verbose", "Enable verbose output");
+        parser.add_positional("filename", "Input file to process");
+
+        let args = vec![
+            "arglite".to_string(),
+            "--help".to_string(),
+        ];
+
+        // Note: This will call exit(0) when running normally
+        let result = parser.parse(args);
+        assert!(result.is_ok());
+    }
+
+    #[test]
     fn test_missing_positional_arg() {
         let mut parser = ArgParser::new();
-        parser.add_positional("filename");
+        parser.add_positional("filename", "Input file to process");
 
         let args = vec!["arglite".to_string()];
 
@@ -40,7 +57,7 @@ mod tests {
     #[test]
     fn test_unknown_flag() {
         let mut parser = ArgParser::new();
-        parser.add_flag("verbose");
+        parser.add_flag("verbose", "Enable verbose output");
 
         let args = vec![
             "arglite".to_string(),
@@ -54,7 +71,7 @@ mod tests {
     #[test]
     fn test_unexpected_arg() {
         let mut parser = ArgParser::new();
-        parser.add_positional("filename");
+        parser.add_positional("filename", "Input file to process");
 
         let args = vec![
             "arglite".to_string(),
