@@ -50,4 +50,19 @@ mod tests {
         let result = parser.parse(args);
         assert!(matches!(result, Err(ArgLiteError::UnknownFlag(_))));
     }
+
+    #[test]
+    fn test_unexpected_arg() {
+        let mut parser = ArgParser::new();
+        parser.add_positional("filename");
+
+        let args = vec![
+            "arglite".to_string(),
+            "example.txt".to_string(),
+            "unexpected".to_string(),
+        ];
+
+        let result = parser.parse(args);
+        assert!(matches!(result, Err(ArgLiteError::ParseError(_))));
+    }
 }

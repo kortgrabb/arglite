@@ -62,4 +62,19 @@ impl ArgParser {
     pub fn get(&self, key: &str) -> Option<&String> {
         self.args.get(key)
     }
+
+    // print help message
+    pub fn help(&self) {
+        let mut help_message = "Usage: program".to_string();
+        
+        for flag in &self.flags {
+            help_message.push_str(&format!(" [--{}]", flag));
+        }
+
+        for arg in &self.positional_args {
+            help_message.push_str(&format!(" <{}>", arg));
+        }
+
+        println!("{}", help_message);
+    }
 }
